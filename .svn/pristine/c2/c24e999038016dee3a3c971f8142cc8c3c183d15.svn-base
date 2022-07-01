@@ -1,0 +1,121 @@
+.social_icons {
+    width: 100%;
+    display: flex;
+    clear: both;
+    padding:0;
+    justify-content: center;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        width:100%; align-items:center;
+
+        li {
+            margin-bottom:25px;
+            &.active{ position:relative;
+            &::after{
+                content: "";
+                position: absolute;
+                right: -15px;
+                top: 0;
+                height: 100%;
+                width: 5px;
+                background: #5867dd;
+              }
+            }
+
+        }
+    }
+   .btn{
+       color:#fff;
+       &.btn-icon{font-size:2rem;}
+       //tumblr
+       &.btn-tumblr{ background-color: #45556c; border-color: #45556c;
+        &:hover{background-color: #434f61; border-color: #434f61}
+      }
+      &.btn-tumblr:focus, &.btn-tumblr.focus{
+        background-color: #434f61; border-color: #434f61; -webkit-box-shadow: 0 0 0 0.2rem rgba(88, 114, 167, 0.5);
+        box-shadow: 0 0 0 0.2rem rgba(88, 114, 167, 0.5); 
+      }
+    //   Yelp yelp
+        &.btn-yelp{ background-color: #c83218; border-color: #c83218;
+            &:hover{background-color: #bb3923; border-color: #bb3923}
+        }
+        &.btn-yelp:focus, &.btn-yelp.focus{
+            background-color: #bb3923; border-color: #bb3923; -webkit-box-shadow: 0 0 0 0.2rem rgba(187, 57, 35,.5);
+            box-shadow: 0 0 0 0.2rem rgba(187, 57, 35,.5);
+        }
+    // whatsapp
+    &.btn-whatsapp{ background-color: #20B038; border-color: #20B038;
+        &:hover{background-color: #269638; border-color: #269638}
+    }
+    &.btn-whatsapp:focus, &.btn-whatsapp.focus{
+        background-color: #269638; border-color: #269638; -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 150, 56,.5);
+        box-shadow: 0 0 0 0.2rem rgba(38, 150, 56,.5);
+    }
+    // pinterest
+    &.btn-pinterest{ background-color: #c92619; border-color: #c92619;
+        &:hover{background-color: #b72e24; border-color: #b72e24}
+    }
+    &.btn-pinterest:focus, &.btn-pinterest.focus{
+        background-color: #b72e24; border-color: #b72e24; -webkit-box-shadow: 0 0 0 0.2rem rgba(183, 46, 36,.5);
+        box-shadow: 0 0 0 0.2rem rgba(183, 46, 36,.5);
+    }
+    // reddit
+    &.btn-reddit{background-color: #e74a1e; border-color: #e74a1e;
+        &:hover{background-color: #dc4f27; border-color: #dc4f27}
+    }
+    &.btn-reddit:focus, &.btn-reddit.focus{
+        background-color: #dc4f27; border-color: #dc4f27; -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 79, 39,.5);
+        box-shadow: 0 0 0 0.2rem rgba(220, 79, 39,.5);
+    }
+    // behance
+    &.btn-behance{ background-color: #000000; border-color: #000000;
+        &:hover{background-color: #333; border-color: #333}
+    }
+    &.btn-behance:focus, &.btn-behance.focus{
+        background-color: #333; border-color: #333; -webkit-box-shadow: 0 0 0 0.2rem rgba(51, 51, 51,.5);
+        box-shadow: 0 0 0 0.2rem rgba(351, 51, 51,.5);
+    }
+    // deviantart
+    &.btn-deviantart{ background-color: #c5d200; border-color: #c5d200;
+        &:hover{background-color: #a6b107; border-color: #a6b107}
+    }
+    &.btn-deviantart:focus, &.btn-deviantart.focus{
+        background-color: #a6b107; border-color: #a6b107; -webkit-box-shadow: 0 0 0 0.2rem rgba(166, 177, 7,.5);
+        box-shadow: 0 0 0 0.2rem rgba(166, 177, 7,.5);
+    }
+    // dribbble
+    &.btn-dribbble{ background-color: #e84d88; border-color: #e84d88;
+        &:hover{background-color: #cc4e7e; border-color: #cc4e7e}
+    }
+    &.btn-dribbble:focus, &.btn-dribbble.focus{
+        background-color: #cc4e7e; border-color: #cc4e7e; -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 78, 126,.5);
+        box-shadow: 0 0 0 0.2rem rgba(204, 78, 126,.5);
+    }
+
+    // account
+    &.btn-account{ background-color: #5867dd; border-color: #5867dd;
+        &:hover{background-color: #4b58bd; border-color: #4b58bd}
+    }
+    &.btn-account:focus, &.btn-account.focus{
+        background-color: #4b58bd; border-color: #4b58bd; -webkit-box-shadow: 0 0 0 0.2rem rgba(75, 88, 189,.5);
+        box-shadow: 0 0 0 0.2rem rgba(75, 88, 189,.5);
+    }
+
+       // profile
+       &.btn-profile{ background-color: #fff; border-color: #999; color:#333;
+        &:hover{background-color: #fff; border-color: #999}
+    }
+    &.btn-profile:focus, &.btn-profile.focus{
+        background-color: #fff; border-color: #999; 
+    }
+
+   } 
+}
+
+
+   

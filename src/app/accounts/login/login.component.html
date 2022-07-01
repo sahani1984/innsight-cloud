@@ -1,0 +1,41 @@
+
+<div class="wrapper">
+    <div class="cols_row">
+
+    <div class="login_form">
+        <div class="brand_logo"><img src="./assets/images/login-logo.jpg" alt="innsight cloud" /></div>        
+         <div class="formBox mt-3">
+             <form #loginform="ngForm" (ngSubmit)="login(loginform.value)">           
+             <div class="form-group">
+               <mat-form-field class="w-100">
+                   <mat-label>Username</mat-label>
+                   <input type="text" name="userName" ngModel matInput required />
+               </mat-form-field>
+             </div>
+             <div class="form-group">
+                <mat-form-field class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input type="password" name="password" ngModel  matInput required />
+                </mat-form-field>
+              </div>
+              <!-- <div class class="form-group d-flex justify-content-between align-items-center">                
+                <mat-checkbox class="remember_me">Rememeber me</mat-checkbox>   
+                <a routerLink="../forgot-password">Forgot Password ?</a>
+              </div> -->
+              <div class="form-group text-center">
+                <button type="submit" [disabled]="loginform.invalid"  mat-raised-button color="primary">
+                     <mat-icon>power_settings_new</mat-icon> 
+                    Login</button>
+              </div>
+              <div *ngIf="invalid_cred" class="form-group text-center text-danger">
+                    <small> Username or password is invalid. </small>
+              </div>
+               <!-- <div class="form-group text-center">
+                Don't have an account yet ?  &nbsp;    <a routerLink="../register"> Sign Up!</a>
+              </div>         -->
+            </form>
+         </div>        
+        </div>
+
+</div>
+</div>

@@ -1,0 +1,652 @@
+<section class="w-100 mt-2 collection_manager">
+    <div class="container-fluid">
+      <div class="whitebgbox">
+        <!-- MAIN HEADING BAR SECTION -->
+        <div class="profile_manager">
+          <div class="kt-portlet">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">Collection Entity</h3>
+              </div>              
+            </div>
+          </div>
+        </div>
+  
+        <div class="kt-container pb-4">
+          <!-- <div class="cards row">
+            <div class="col-md-4">
+              <mat-card>
+                <mat-card-title>Total Entity Count</mat-card-title>               
+                <mat-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original.
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div> -->
+     <div class="searchform">
+            <form>
+              <div class="row">         
+                <div class="col">
+                  <mat-form-field class="w-100 searchfield">
+                    <mat-label>Search</mat-label>
+                    <input [(ngModel)]="search" name="txtSearch" type="text" (keyup.enter)="bindData()" matInput />
+                    <mat-icon title="Search" (click)="bindData()" matSuffix>search</mat-icon>
+                  </mat-form-field>
+                </div>     
+                <div class="col-md-2">
+                  <mat-form-field class="w-100">
+                    <mat-label>Search Type</mat-label>
+                    <mat-select [(value)]="searchType" (selectionChange)="bindData()">                   
+                      <mat-option value="collection">Collection</mat-option>
+                      <mat-option value="entity">Entity</mat-option>                  
+                    </mat-select>
+                  </mat-form-field>
+                </div>                 
+               <div class="col">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Source</mat-label>
+                    <mat-select [(value)]="source" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option *ngFor="let s of sourceList" [value]="s.source">{{s.name}}</mat-option>                                         
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                
+              <div class="col">
+                <mat-form-field  class="w-100">
+                    <mat-label>Activation Status</mat-label>
+                    <mat-select [(value)]="activationStatus" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option value="active">Active</mat-option>
+                      <mat-option value="inactive">Inactive</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col">
+                  <mat-form-field class="w-100">
+                    <mat-label>Crawling Status</mat-label>
+                    <mat-select [(value)]="crawlingStatus" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option value="0">pending</mat-option>
+                      <mat-option value="1">completed</mat-option>
+                      <mat-option value="2">running</mat-option>
+                       <mat-option value="3">Error</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Client</mat-label>
+                  <mat-select [(value)]="ClientID" (selectionChange)="bindData()">                      
+                      <mat-option value="">All</mat-option>                    
+                      <mat-option *ngFor="let c of clientList" [value]="c.client_id">{{c.client_name}}</mat-option>                    
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Collection Type</mat-label>
+                    <mat-select [(value)]="collectionType" (selectionChange)="bindData()">
+                      <mat-option value="keyword">Event</mat-option>
+                      <mat-option value="profile">Profile</mat-option>
+                      <mat-option value="location">Location</mat-option>                     
+                      <mat-option value="federated">Federated</mat-option>                     
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Sort By</mat-label>
+                    <mat-select [(value)]="sort" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option value="newest">Newest </mat-option>
+                      <mat-option value="oldest">Oldest</mat-option>
+                      <mat-option value="start_crawl_newest">Start Crawl Newest</mat-option>                     
+                      <mat-option value="start_crawl_oldest">Start Crawl Oldest</mat-option>                     
+                      <mat-option value="last_crawl_newest">Last Crawl Newest</mat-option>                     
+                      <mat-option value="last_crawl_oldest">Last Crawl Oldest</mat-option>                     
+                      <mat-option value="a-z">A-Z</mat-option>                     
+                      <mat-option value="z-a">Z-A</mat-option>                     
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col" *ngIf="collectionType == 'profile'">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Profile Type</mat-label>
+                    <mat-select [(value)]="profileType" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option value="profile">Profile</mat-option>
+                      <mat-option value="group">Group</mat-option>
+                      <mat-option value="page">Page</mat-option>                     
+                      <mat-option value="location">Channel</mat-option>                     
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col" *ngIf="collectionType == 'profile' && source =='facebook'">
+                  <mat-form-field  class="w-100">
+                    <mat-label>Avatar</mat-label>
+                    <mat-select [(value)]="avatar" (selectionChange)="bindData()">
+                      <mat-option value="">All</mat-option>
+                      <mat-option *ngFor="let avatar of avatarList" [value]="avatar.user_name">{{avatar.first_name}} {{avatar.last_name}}</mat-option>                                        
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+  
+         
+  
+  <div class="table-responsive" >
+            <div [hidden]="!collectionEntityList.length" class="scrollable_mat_table customScrollbar">
+              <ng-container *ngIf="collectionType == 'keyword'">           
+               <table mat-table [dataSource]="collectionEntityList" #recordTbl class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="Sr.No" sticky>
+                  <th mat-header-cell *matHeaderCellDef width="80">Sr.No</th>
+                  <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+                </ng-container>
+                
+              <ng-container matColumnDef="Collection Name">
+                  <th mat-header-cell *matHeaderCellDef>Collection Name</th>
+                  <td mat-cell *matCellDef="let element"> {{element.collection_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Client ID">
+                  <th mat-header-cell *matHeaderCellDef> Client ID </th>
+                  <td mat-cell *matCellDef="let element">{{element.client_id | titlecase}}</td>
+                </ng-container>  
+
+                <ng-container matColumnDef="Keyword Name">
+                  <th mat-header-cell *matHeaderCellDef> Keyword Name </th>
+                  <td mat-cell *matCellDef="let element">{{element.keyword_name | titlecase}}</td>
+                </ng-container>  
+
+                <ng-container matColumnDef="Source">
+                  <th mat-header-cell *matHeaderCellDef> Source</th>
+                  <td mat-cell *matCellDef="let element">{{element.source | titlecase}}</td>
+                </ng-container>
+
+              <ng-container matColumnDef="Created Date">
+                  <th mat-header-cell *matHeaderCellDef> Created Date</th>
+                  <td mat-cell *matCellDef="let element">{{element.created_at}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                  <th mat-header-cell *matHeaderCellDef> isActive</th>
+                  <td mat-cell *matCellDef="let element">{{element.activationStatus | titlecase}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Crawling Status">
+                  <th mat-header-cell *matHeaderCellDef> Crawling Status</th>
+                <td mat-cell *matCellDef="let element">                
+                 <ng-template [ngIf]="element.crawling_status == 0"><span class="{{status_btn}} btn-label-default">Pending</span></ng-template>
+                 <ng-template [ngIf]="element.crawling_status == 1"><span class="{{status_btn}} btn-label-success">Completed</span></ng-template>
+                 <ng-template [ngIf]="element.crawling_status == 2"><span class="{{status_btn}} btn-label-warning">Running</span></ng-template>
+                 <ng-template [ngIf]="element.crawling_status == 3"><span class="{{status_btn}} btn-label-danger">Error</span></ng-template>
+                 </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Migration Status">
+                  <th mat-header-cell *matHeaderCellDef> Migration Status</th>
+                  <td mat-cell *matCellDef="let element">{{element.migration_status | titlecase}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Start Crawl Date">
+                  <th mat-header-cell *matHeaderCellDef>Start Crawl Date</th>
+                  <td mat-cell *matCellDef="let element">{{element.start_crawl_date}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Last Crawl Date">
+                  <th mat-header-cell *matHeaderCellDef>Last Crawl Date</th>
+                  <td mat-cell *matCellDef="let element">{{element.last_crawl_date}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Message">
+                  <th mat-header-cell *matHeaderCellDef>Message</th>
+                  <td mat-cell *matCellDef="let element">{{element.msg}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Collection ID">
+                  <th mat-header-cell *matHeaderCellDef> Collection ID </th>
+                  <td mat-cell *matCellDef="let element"> {{element.collection_id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Keyword ID">
+                  <th mat-header-cell *matHeaderCellDef> Keyword ID </th>
+                  <td mat-cell *matCellDef="let element"> {{element.keyword_id}} </td>
+                </ng-container>
+
+              <ng-container matColumnDef="Action" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef width="50"> Action </th>
+                  <td mat-cell *matCellDef="let element" align="center">   
+                    <button (click)="viewEntity(element.keyword_id)" title="View" type="button" class="btn btn-sm btn-clean btn-bold btn-upper">View</button>               
+                    <button *ngIf="element.crawling_status == 3" (click)="reCrawl(element.keyword_id)" title="Re-Crawl" type="button" class="btn btn-sm btn-clean btn-bold btn-upper">Re-Crawl</button>               
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </ng-container>
+    </div>
+
+          <div [hidden]="!profileKeywordList.length" class="scrollable_mat_table customScrollbar">
+            <ng-container *ngIf="collectionType == 'profile'">           
+              <table mat-table [dataSource]="profileKeywordList" #profileTbl class="mat-elevation-z8 w-100">
+               <ng-container matColumnDef="Sr.No" sticky>
+                 <th mat-header-cell *matHeaderCellDef width="80" sticky>Sr.No</th>
+                 <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="Profile Image">
+                <th mat-header-cell *matHeaderCellDef> Profile Image </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <img class="profileImg" [src]="element.profile_image_url"  onerror="this.src='./assets/images/default.jpg';"   [alt]="element.profile_user_name"  /></td>
+              </ng-container>
+
+            <ng-container matColumnDef="Collection Name">
+                 <th mat-header-cell *matHeaderCellDef>Collection Name</th>
+                 <td mat-cell *matCellDef="let element"> {{element.collection_name}} </td>
+               </ng-container>
+
+               <ng-container matColumnDef="Client ID">
+                 <th mat-header-cell *matHeaderCellDef> Client ID </th>
+                 <td mat-cell *matCellDef="let element">{{element.client_id | titlecase}}</td>
+               </ng-container>  
+
+              
+               <ng-container matColumnDef="Source">
+                 <th mat-header-cell *matHeaderCellDef> Source</th>
+                 <td mat-cell *matCellDef="let element">{{element.source | titlecase}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="Health">
+                <th mat-header-cell *matHeaderCellDef>Health</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="progressbar red"></span>
+                </td>
+              </ng-container>
+
+               
+               <ng-container matColumnDef="Created Date">
+                 <th mat-header-cell *matHeaderCellDef> Created Date</th>
+                 <td mat-cell *matCellDef="let element">{{element.created_at}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="isActive">
+                 <th mat-header-cell *matHeaderCellDef> isActive</th>
+                 <td mat-cell *matCellDef="let element">{{element.activationStatus | titlecase}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="Crawling Status">
+                 <th mat-header-cell *matHeaderCellDef> Crawling Status</th>
+                 <td mat-cell *matCellDef="let element">                
+                  <ng-template [ngIf]="element.crawling_status == 0"><span class="{{status_btn}} btn-label-default">Pending</span></ng-template>
+                  <ng-template [ngIf]="element.crawling_status == 1"><span class="{{status_btn}} btn-label-success">Completed</span></ng-template>
+                  <ng-template [ngIf]="element.crawling_status == 2"><span class="{{status_btn}} btn-label-warning">Running</span></ng-template>
+                  <ng-template [ngIf]="element.crawling_status == 3"><span class="{{status_btn}} btn-label-danger">Error</span></ng-template>
+                  </td>
+               </ng-container>
+
+               <ng-container matColumnDef="Avatar">
+                <th mat-header-cell *matHeaderCellDef> Avatar</th>
+                <td mat-cell *matCellDef="let element">{{element.avatar_user_name | titlecase}}</td>
+              </ng-container>
+             
+             <ng-container matColumnDef="Start Crawl Date">
+                 <th mat-header-cell *matHeaderCellDef>Start Crawl Date</th>
+                 <td mat-cell *matCellDef="let element">{{element.start_crawl_date}}</td>
+               </ng-container>
+
+             <ng-container matColumnDef="Last Crawl Date">
+                 <th mat-header-cell *matHeaderCellDef>Last Crawl Date</th>
+                 <td mat-cell *matCellDef="let element">{{element.last_crawl_date}}</td>
+               </ng-container>
+
+              <ng-container matColumnDef="Start/Last Crawling Status">
+                <th mat-header-cell *matHeaderCellDef>Start/Last Crawling Status</th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.start_crawling_status==0?"Pending":element.start_crawling_status==1?"Running":element.start_crawling_status==2?"Completed":element.start_crawling_status}}/
+                  {{element.last_crawling_status==0?"Pending":element.last_crawling_status==1?"Running":element.last_crawling_status==2?"Completed":element.last_crawling_status}}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="IsValid">
+                <th mat-header-cell *matHeaderCellDef>IsValid</th>
+                <td mat-cell *matCellDef="let element">{{element.is_valid | titlecase}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Paused Status">
+                <th mat-header-cell *matHeaderCellDef>Paused Status</th>
+                <td mat-cell *matCellDef="let element">{{element.paused_status | titlecase}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile Category">
+                <th mat-header-cell *matHeaderCellDef>Profile Category</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_category | titlecase}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile Country">
+                <th mat-header-cell *matHeaderCellDef>Profile Country</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_country}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile ID">
+                <th mat-header-cell *matHeaderCellDef>Profile ID</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_id}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile Name">
+                <th mat-header-cell *matHeaderCellDef>Profile Name</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_name | titlecase}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile URL">
+                <th mat-header-cell *matHeaderCellDef>Profile URL</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_url}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Profile Username">
+                <th mat-header-cell *matHeaderCellDef>Profile Username</th>
+                <td mat-cell *matCellDef="let element">{{element.profile_user_name}}</td>
+              </ng-container>
+
+             
+             
+               <ng-container matColumnDef="Message">
+                 <th mat-header-cell *matHeaderCellDef>Message</th>
+                 <td mat-cell *matCellDef="let element"> <span *ngIf="!element.msg"> -</span> {{element.msg}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="Threat Score">
+                <th mat-header-cell *matHeaderCellDef>Threat Score</th>
+                <td mat-cell *matCellDef="let element">{{element.threat_score}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Collection ID">
+                <th mat-header-cell *matHeaderCellDef> Collection ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.collection_id}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Keyword ID">
+               <th mat-header-cell *matHeaderCellDef> Keyword ID </th>
+               <td mat-cell *matCellDef="let element"> {{element.keyword_id}} </td>
+             </ng-container>
+
+             <ng-container matColumnDef="Action" stickyEnd>
+                 <th mat-header-cell *matHeaderCellDef width="50"> Action </th>
+                 <td mat-cell *matCellDef="let element" align="center">   
+                  <button (click)="viewEntity(element.keyword_id)" title="View" type="button" class="btn btn-sm btn-clean btn-bold btn-upper">View</button>               
+                  </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="displayedColumnsProf; sticky: true"></tr>
+               <tr mat-row *matRowDef="let row; columns: displayedColumnsProf;"></tr>
+             </table>
+           </ng-container>
+</div>
+
+<div [hidden]="!locationKeywordList.length" class="scrollable_mat_table customScrollbar">
+           <ng-container *ngIf="collectionType == 'location'">           
+            <table mat-table [dataSource]="locationKeywordList" #locationTbl class="mat-elevation-z8 w-100">
+             <ng-container matColumnDef="Sr.No" sticky>
+               <th mat-header-cell *matHeaderCellDef width="80" sticky>Sr.No</th>
+               <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+             </ng-container>
+
+           <ng-container matColumnDef="Collection Name">
+               <th mat-header-cell *matHeaderCellDef>Collection Name</th>
+               <td mat-cell *matCellDef="let element"> {{element.collection_name | titlecase}} </td>
+             </ng-container>
+
+             <ng-container matColumnDef="Client ID">
+               <th mat-header-cell *matHeaderCellDef> Client ID </th>
+               <td mat-cell *matCellDef="let element">{{element.client_id | titlecase}}</td>
+             </ng-container>  
+
+             <ng-container matColumnDef="Keyword Name">
+               <th mat-header-cell *matHeaderCellDef> Keyword Name </th>
+               <td mat-cell *matCellDef="let element">{{element.keyword | titlecase}}</td>
+             </ng-container>  
+
+             <ng-container matColumnDef="Source">
+               <th mat-header-cell *matHeaderCellDef> Source</th>
+               <td mat-cell *matCellDef="let element">{{element.source | titlecase}}</td>
+             </ng-container>
+
+             <ng-container matColumnDef="Health">
+              <th mat-header-cell *matHeaderCellDef>Health</th>
+              <td mat-cell *matCellDef="let element">
+                <span class="progressbar green"></span>
+              </td>
+            </ng-container>
+             
+             <ng-container matColumnDef="Created Date">
+               <th mat-header-cell *matHeaderCellDef> Created Date</th>
+               <td mat-cell *matCellDef="let element">{{element.created_at}}</td>
+             </ng-container>
+
+             <ng-container matColumnDef="isActive">
+               <th mat-header-cell *matHeaderCellDef> isActive</th>
+               <td mat-cell *matCellDef="let element">{{element.activationStatus | titlecase}}</td>
+             </ng-container>
+
+             <ng-container matColumnDef="Crawling Status">
+               <th mat-header-cell *matHeaderCellDef> Crawling Status</th>
+               <td mat-cell *matCellDef="let element">                
+                <ng-template [ngIf]="element.crawling_status == 0"><span class="{{status_btn}} btn-label-default">Pending</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 1"><span class="{{status_btn}} btn-label-success">Completed</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 2"><span class="{{status_btn}} btn-label-warning">Running</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 3"><span class="{{status_btn}} btn-label-danger">Error</span></ng-template>
+                </td>
+             </ng-container>
+
+            
+             <ng-container matColumnDef="Start Crawl Date">
+               <th mat-header-cell *matHeaderCellDef>Start Crawl Date</th>
+               <td mat-cell *matCellDef="let element">{{element.start_crawl_date}}</td>
+             </ng-container>
+
+             <ng-container matColumnDef="Last Crawl Date">
+              <th mat-header-cell *matHeaderCellDef>Last Crawl Date</th>
+              <td mat-cell *matCellDef="let element">{{element.last_crawl_date}}</td>
+            </ng-container>
+
+             <ng-container matColumnDef="Start/Last Crawling Status">
+              <th mat-header-cell *matHeaderCellDef>Start/Last Crawling Status</th>
+              <td mat-cell *matCellDef="let element">
+                {{element.start_crawling_status==0?"Pending":element.start_crawling_status==1?"Running":element.start_crawling_status==2?"Completed":element.start_crawling_status}}/
+                {{element.last_crawling_status==0?"Pending":element.last_crawling_status==1?"Running":element.last_crawling_status==2?"Completed":element.last_crawling_status}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Location Center">
+              <th mat-header-cell *matHeaderCellDef>Location Center</th>
+              <td mat-cell *matCellDef="let element">{{element.location_center}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Location Name">
+              <th mat-header-cell *matHeaderCellDef>Location Name</th>
+              <td mat-cell *matCellDef="let element">{{element.location_name | titlecase}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Radius">
+              <th mat-header-cell *matHeaderCellDef>Radius</th>
+              <td mat-cell *matCellDef="let element">{{element.radius}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Paused Status">
+              <th mat-header-cell *matHeaderCellDef>Paused Status</th>
+              <td mat-cell *matCellDef="let element">{{element.paused_status | titlecase}}</td>
+            </ng-container>
+
+             <ng-container matColumnDef="Message">
+               <th mat-header-cell *matHeaderCellDef>Message</th>
+               <td mat-cell *matCellDef="let element"> <span *ngIf="!element.msg"> -</span> {{element.msg}}</td>
+             </ng-container>
+
+             
+             <ng-container matColumnDef="Collection ID">
+              <th mat-header-cell *matHeaderCellDef> Collection ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.collection_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Keyword ID">
+             <th mat-header-cell *matHeaderCellDef> Keyword ID </th>
+             <td mat-cell *matCellDef="let element"> {{element.keyword_id}} </td>
+           </ng-container>
+
+           <ng-container matColumnDef="Action" stickyEnd>
+               <th mat-header-cell *matHeaderCellDef width="50"> Action </th>
+               <td mat-cell *matCellDef="let element" align="center">                  
+                <button (click)="viewEntity(element.keyword_id)" title="View" type="button" class="btn btn-sm btn-clean btn-bold btn-upper">View</button>               
+                </td>
+             </ng-container>
+             <tr mat-header-row *matHeaderRowDef="displayedColumnsLoc; sticky: true"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumnsLoc;"></tr>
+           </table>
+         </ng-container>
+    </div>   
+    
+  
+<div [hidden]="!federatedKeywordList.length" class="scrollable_mat_table customScrollbar">
+  <ng-container *ngIf="collectionType == 'federated'">           
+   <table mat-table [dataSource]="federatedKeywordList" #fedetatedTbl class="mat-elevation-z8 w-100">
+    <ng-container matColumnDef="Sr.No" sticky>
+      <th mat-header-cell *matHeaderCellDef width="80" sticky>Sr.No</th>
+      <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+    </ng-container>
+
+   <ng-container matColumnDef="Collection Name">
+      <th mat-header-cell *matHeaderCellDef>Collection Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.collection_name | titlecase}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Client ID">
+      <th mat-header-cell *matHeaderCellDef> Client ID </th>
+      <td mat-cell *matCellDef="let element">{{element.client_id | titlecase}}</td>
+    </ng-container>  
+
+    <ng-container matColumnDef="Keyword Name">
+      <th mat-header-cell *matHeaderCellDef> Keyword Name </th>
+      <td mat-cell *matCellDef="let element">{{element.keyword | titlecase}}</td>
+    </ng-container>  
+
+    <ng-container matColumnDef="Source">
+      <th mat-header-cell *matHeaderCellDef> Source</th>
+      <td mat-cell *matCellDef="let element">{{element.source | titlecase}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Health">
+     <th mat-header-cell *matHeaderCellDef>Health</th>
+     <td mat-cell *matCellDef="let element">
+       <span class="progressbar green"></span>
+     </td>
+   </ng-container>
+    
+    <ng-container matColumnDef="Created Date">
+      <th mat-header-cell *matHeaderCellDef> Created Date</th>
+      <td mat-cell *matCellDef="let element">{{element.created_at}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="isActive">
+      <th mat-header-cell *matHeaderCellDef> isActive</th>
+      <td mat-cell *matCellDef="let element">{{element.activationStatus | titlecase}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Crawling Status">
+      <th mat-header-cell *matHeaderCellDef> Crawling Status</th>
+      <td mat-cell *matCellDef="let element">                
+        <ng-template [ngIf]="element.crawling_status == 0"><span class="{{status_btn}} btn-label-default">Pending</span></ng-template>
+        <ng-template [ngIf]="element.crawling_status == 1"><span class="{{status_btn}} btn-label-success">Completed</span></ng-template>
+        <ng-template [ngIf]="element.crawling_status == 2"><span class="{{status_btn}} btn-label-warning">Running</span></ng-template>
+        <ng-template [ngIf]="element.crawling_status == 3"><span class="{{status_btn}} btn-label-danger">Error</span></ng-template>
+        </td>
+    </ng-container>
+
+   <ng-container matColumnDef="Start Crawl Date">
+      <th mat-header-cell *matHeaderCellDef>Start Crawl Date</th>
+      <td mat-cell *matCellDef="let element">{{element.start_crawl_date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Last Crawl Date">
+     <th mat-header-cell *matHeaderCellDef>Last Crawl Date</th>
+     <td mat-cell *matCellDef="let element">{{element.last_crawl_date}}</td>
+   </ng-container>
+
+    <ng-container matColumnDef="Start/Last Crawling Status">
+     <th mat-header-cell *matHeaderCellDef>Start/Last Crawling Status</th>
+     <td mat-cell *matCellDef="let element">
+       {{element.start_crawling_status==0?"Pending":element.start_crawling_status==1?"Running":element.start_crawling_status==2?"Completed":element.start_crawling_status}}/
+       {{element.last_crawling_status==0?"Pending":element.last_crawling_status==1?"Running":element.last_crawling_status==2?"Completed":element.last_crawling_status}}
+     </td>
+   </ng-container>
+
+   <ng-container matColumnDef="Location Center">
+     <th mat-header-cell *matHeaderCellDef>Location Center</th>
+     <td mat-cell *matCellDef="let element">{{element.location_center}}</td>
+   </ng-container>
+
+   <ng-container matColumnDef="Location Name">
+     <th mat-header-cell *matHeaderCellDef>Location Name</th>
+     <td mat-cell *matCellDef="let element">{{element.location_name | titlecase}}</td>
+   </ng-container>
+
+   <ng-container matColumnDef="Radius">
+     <th mat-header-cell *matHeaderCellDef>Radius</th>
+     <td mat-cell *matCellDef="let element">{{element.radius}}</td>
+   </ng-container>
+
+   <ng-container matColumnDef="Paused Status">
+     <th mat-header-cell *matHeaderCellDef>Paused Status</th>
+     <td mat-cell *matCellDef="let element">{{element.paused_status | titlecase}}</td>
+   </ng-container>
+
+    <ng-container matColumnDef="Message">
+      <th mat-header-cell *matHeaderCellDef>Message</th>
+      <td mat-cell *matCellDef="let element"> <span *ngIf="!element.msg"> -</span> {{element.msg}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Collection ID">
+      <th mat-header-cell *matHeaderCellDef> Collection ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.collection_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Keyword ID">
+     <th mat-header-cell *matHeaderCellDef> Keyword ID </th>
+     <td mat-cell *matCellDef="let element"> {{element.keyword_id}} </td>
+   </ng-container>
+
+
+  <ng-container matColumnDef="Action" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef width="50"> Action </th>
+      <td mat-cell *matCellDef="let element" align="center">    
+        <button (click)="viewEntity(element.keyword_id)" title="View" type="button" class="btn btn-sm btn-clean btn-bold btn-upper">View</button>                             
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsLoc; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsLoc;"></tr>
+  </table>
+</ng-container>
+</div>       
+   
+            
+ <mat-paginator [length]="totalNumberOfRecord" [pageSize]="size" [pageIndex]="page" [hidePageSize]="true"
+            (page)="paginate($event)">
+   </mat-paginator>
+
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  

@@ -1,0 +1,93 @@
+<app-header></app-header>
+<main>
+  <mat-sidenav-container fullscreen class="customScrollbar">
+    <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true">
+      <div class="panel_nav" [class.smallMenu]="lftPnlSize">
+        <span>Menu</span>
+        <button  (click)="navSmall()" class="p-0"><img src="./assets/images/svg_icons/double_arrow.svg"
+            alt="arrow" /></button>
+      </div>    
+        <mat-accordion #accordion="matAccordion">          
+          <mat-expansion-panel [disabled]="lftPnlSize" [expanded]="firstPanel" (opened)="firstPanel = true"  (closed)="firstPanel = false" >
+            <mat-expansion-panel-header [class.active]="firstPanelHeader">
+              <mat-panel-title title="Manage Avatar">
+                <i class="la la-users icons"></i>
+                <span *ngIf="sidenavWidth > 7"> Manage Avatar</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="submenu">
+              <li routerLinkActive="active"><button class="link_btn" routerLink="avatar-manager/avatar-list">List Avatar</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="avatar-manager/avatar-add">Add Avatar</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="avatar-manager/avatar-list-category">List Category</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="avatar-manager/avatar-add-category">Add Category</button></li>
+            </ul>
+          </mat-expansion-panel>  
+          <mat-expansion-panel [disabled]="lftPnlSize"  [expanded]="secondPanel"  (opened)="secondPanel = true" (closed)="secondPanel = false" >
+            <mat-expansion-panel-header [class.active]="secondPanelHeader">
+              <mat-panel-title title="Manage Proxy">
+                <i class="la la-server icons"></i>
+                <span *ngIf="sidenavWidth > 7"> Manage Proxy</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="submenu">
+              <li routerLinkActive="active"><button class="link_btn" routerLink="proxy-manager/add-proxy">Add Proxy</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="proxy-manager/list-proxy">List Proxy</button></li>
+            </ul>
+          </mat-expansion-panel>
+          
+          <mat-expansion-panel [disabled]="lftPnlSize"  [expanded]="thirdPanel"  (opened)="thirdPanel = true" (closed)="thirdPanel = false">
+            <mat-expansion-panel-header [class.active]="thirdPanelHeader">
+              <mat-panel-title title="News Source">
+                <i class="la la-newspaper-o icons"></i>
+                <span *ngIf="sidenavWidth > 7"> News Source</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="submenu">
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/add-news-source">Add News Source</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/list-news-source">List News Source</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/add-category">Add Category</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/list-category">List Category</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/add-language">Add Language</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="news-source/list-language">List Language</button></li>
+            </ul>
+          </mat-expansion-panel>
+          <mat-expansion-panel [disabled]="lftPnlSize"  [expanded]="fourthPanel"  (opened)="fourthPanel = true" (closed)="fourthPanel = false">
+            <mat-expansion-panel-header [class.active]="fourthPanelHeader">
+              <mat-panel-title title="Manage Client">              
+                <img src="./assets/images/svg_icons/client.svg" class="client" />
+                <span *ngIf="sidenavWidth > 7">Manage Client</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="submenu">
+              <li routerLinkActive="active"><button class="link_btn" routerLink="client-manager/add-client">Add Client</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="client-manager/list-client">List Client</button></li>
+           </ul>
+          </mat-expansion-panel> 
+          <mat-expansion-panel [disabled]="lftPnlSize"  [expanded]="fifthPanel"  (opened)="fifthPanel = true" (closed)="fourthPanel = false">
+            <mat-expansion-panel-header [class.active]="fifthPanelHeader">
+              <mat-panel-title title="Manage Jobs">
+                <img src="./assets/images/svg_icons/jobs.svg" class="jobs" />
+                <span *ngIf="sidenavWidth > 7">Manage Jobs</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="submenu">
+               <li routerLinkActive="active"><button class="link_btn"
+                   routerLink="manage-jobs/heartbeat">Heartbeat</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/collection-list">Collection Lists</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/collection-entity">Collection Entity</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/job-detail">Job Detail</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/profile-finder">Profile Finder</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/cloud-logs">Cloud Logs</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/migration-job-tracking">Migration Job Tracking</button></li>
+              <li routerLinkActive="active"><button class="link_btn" routerLink="manage-jobs/migration-report">Migration Report</button></li>
+            </ul>
+          </mat-expansion-panel>             
+        </mat-accordion>     
+    </mat-sidenav>
+    <mat-sidenav-content [ngStyle]="{'marginLeft.em': sidenavWidth }">
+      <div class="example-sidenav-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</main>

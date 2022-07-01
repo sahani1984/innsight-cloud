@@ -1,0 +1,137 @@
+
+<section class="w-100 mt-2">
+    <div class="container-fluid">
+      <div class="whitebgbox">
+        <!-- MAIN HEADING BAR SECTION -->
+        <div class="profile_manager">
+          <div class="kt-portlet">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">{{isEditMode?'Update Avatar':'Add Avatar'}}</h3>
+              </div>             
+            </div>
+          </div>
+        </div>
+     
+     
+  
+        <div class="kt-container mb-5 pb-5"> 
+            <div class="avatar_content">
+                <form [formGroup]="addAvatarform" (ngSubmit)=addAvatar(addAvatarform.value)>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>First Name</mat-label>
+                                <input type="text" formControlName="firstName" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Last Name</mat-label>
+                                <input type="text" formControlName="lastName"  matInput />
+                            </mat-form-field>
+                        </div>  
+                    </div>
+
+                   
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>User Name</mat-label>
+                                <input type="text" [readonly]="isEditMode" formControlName="username"  matInput />
+                            </mat-form-field>                      
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Password</mat-label>
+                                <input type="password" formControlName="password"  matInput />
+                            </mat-form-field>
+                        </div>                                         
+                    </div>
+
+                    <div class="row mb-3">                        
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Country</mat-label>
+                               <mat-select formControlName="country" >
+                                   <mat-option *ngFor="let c of collectionService.countryList; let i=index" [value]="c.code">{{c.country}}</mat-option>
+                               </mat-select>
+                            </mat-form-field>
+                        </div>  
+                        <div class="col-md-6 d-flex align-items-center">
+                            <mat-label class="mr-3">Gender</mat-label>
+                                <mat-radio-group formControlName="gender"  aria-label="Select an option">
+                                <mat-radio-button value="male">Male</mat-radio-button>
+                                <mat-radio-button value="female">Female</mat-radio-button>
+                              </mat-radio-group>                        
+                        </div>                             
+                    </div>
+
+
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Email ID</mat-label>
+                                <input type="email" formControlName="email"  matInput />
+                            </mat-form-field>                      
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Phone Number</mat-label>
+                                <input type="tel" formControlName="phone" maxlength="10"  matInput />
+                            </mat-form-field>
+                        </div>                                                                    
+                    </div>
+
+                    <div class="row mb-3">                       
+                        <div class="col-md-6">
+                            <mat-form-field   class="w-100">
+                                <mat-label>Source</mat-label>
+                                <mat-select  formControlName="source" >
+                                    <mat-option value="facebook">Facebook</mat-option>
+                                    <mat-option value="twitter">Twitter</mat-option>
+                                    <mat-option value="youtube">Youtube</mat-option>
+                                    <mat-option value="instagram">Instagram</mat-option>
+                                </mat-select>
+                            </mat-form-field>                   
+                        </div>    
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Category</mat-label>
+                                <mat-select formControlName="category" >
+                                    <mat-option *ngFor="let category of collectionService.avatarCat" [value]="category.record_id">{{category.category_name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>                   
+                        </div>   
+                     </div>
+
+                    <div class="row mb-3">                      
+                    <div class="col-md-6">
+                        <mat-form-field class="w-100">
+                            <mat-label>Proxy</mat-label>
+                            <mat-select formControlName="proxy" >
+                                <mat-option *ngFor="let proxy of collectionService.proxyList" [value]="proxy.record_id">{{proxy.ip}}:{{proxy.port}}</mat-option>                                
+                            </mat-select>
+                        </mat-form-field>  
+                       </div>
+                       <div class="col-md-6 text-right">
+                        <button *ngIf="isEditMode" (click)="update(addAvatarform.value)" type="button" mat-raised-button  color="primary" class="mr-2">Update</button>                
+                        <button  *ngIf="!isEditMode"  type="submit" mat-raised-button [disabled]="addAvatarform.invalid" color="primary" class="mr-2">Save</button>                
+                        <button type="button" (click)="navigateToList()" mat-raised-button>Cancel</button>               
+                       </div>                                      
+                    </div>                   
+                   <!-- <div class="form-group  w-100 d-flex justify-content-end">                                      
+                          <button *ngIf="isEditMode" (click)="update(addAvatarform.value)" type="button" mat-raised-button  color="primary" class="mr-2">Update</button>                
+                          <button  *ngIf="!isEditMode"  type="submit" mat-raised-button [disabled]="addAvatarform.invalid" color="primary" class="mr-2">Save</button>                
+                          <button type="button" (click)="navigateToList()" mat-raised-button>Cancel</button>               
+                     </div> -->
+                 </form>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  

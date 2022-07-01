@@ -1,0 +1,12 @@
+.la-eye{font:normal normal normal 18px/1 "LineAwesome" !important}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type{white-space: nowrap;}
+.charts{
+    width:100%; display:block; float: left; clear:both; margin:0 0 15px;border-bottom: 1px solid #ccc;
+    padding-bottom: 15px; position: relative;
+    box-shadow: 5px 5px 5px #ccc;
+    &:after{content:""; background-color:#fff; position: absolute; right: -10px; height: 100%; width: 10px;top: 0;}
+    highcharts-chart{width: 100%; height: 300px; display: block; font-family: 'Poppins, Helvetica, sans-serif !important'}
+}
+.indicators{
+    img{width:20px; height:20px; cursor: pointer;}
+}

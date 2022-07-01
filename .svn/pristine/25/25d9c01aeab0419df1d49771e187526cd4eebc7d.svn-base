@@ -1,0 +1,22 @@
+<div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+    <ul class="kt-menu__nav ">
+        <li class="kt-menu__item">
+            <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <span class="kt-menu__link-text">Analysis</span>
+                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+            </a>
+        </li>
+        <li class="kt-menu__item" routerLinkActive="kt-menu__item--open kt-menu__item--here">
+            <a routerLink="collection" class="kt-menu__link kt-menu__toggle">
+                <span class="kt-menu__link-text">Collect</span>
+                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+            </a> 
+        </li>
+        <li class="kt-menu__item"  routerLinkActive="kt-menu__item--open kt-menu__item--here">
+            <a routerLink="profile-finder" class="kt-menu__link kt-menu__toggle">
+                <span class="kt-menu__link-text">Profile Finder</span>
+                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>

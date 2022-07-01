@@ -1,0 +1,111 @@
+<section class="w-100 mt-2">
+    <div class="container-fluid">
+      <div class="whitebgbox">
+        <!-- MAIN HEADING BAR SECTION -->
+        <div class="profile_manager">
+          <div class="kt-portlet">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">{{editmode?'Update Client':'Add Client'}}</h3>
+              </div>             
+            </div>
+          </div>
+        </div>
+  
+        <div class="kt-container mb-5 pb-5"> 
+            <div class="avatar_content">
+                <form [formGroup]="clientForm" (ngSubmit)="saveClient(clientForm.value)">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Client Name</mat-label>
+                                <input type="text" [readonly]="editmode" formControlName="clientName" matInput />
+                            </mat-form-field>
+                        </div> 
+                        <div class="col-md-6">
+                          <mat-form-field class="w-100">
+                              <mat-label>Client ID</mat-label>
+                              <input type="text"  [readonly]="editmode" formControlName="clientId" matInput />
+                          </mat-form-field>
+                      </div>  
+                  </div>
+
+                  <div  class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>User Name</mat-label>
+                                <input type="text"  [readonly]="editmode" formControlName="userName" matInput />
+                            </mat-form-field>
+                        </div> 
+                        <div class="col-md-6">
+                          <mat-form-field class="w-100">
+                              <mat-label>Password</mat-label>
+                              <input type="password"  [readonly]="editmode" formControlName="password" matInput />
+                          </mat-form-field>
+                      </div>  
+                  </div>
+                  
+                  <div class="row mb-3">                        
+                        <div class="col-md-6">
+                            <mat-form-field  class="w-100 datepicker">
+                                <mat-label>Activation Date</mat-label>
+                                <input  #activationDate formControlName="activationDate" 
+                                [min]="activationMinDate"                             
+                                [matDatepicker]="activeDt" matInput>
+                                <mat-datepicker-toggle matSuffix [for]="activeDt"></mat-datepicker-toggle>
+                                <mat-datepicker #activeDt></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100 datepicker">
+                                <mat-label>Deactivation Date</mat-label>
+                                <input  formControlName="deactivationDate" 
+                                [min]="deactivationMinDate"
+                                [matDatepicker]="deactiveDt" matInput />
+                                <mat-datepicker-toggle matSuffix [for]="deactiveDt"></mat-datepicker-toggle>
+                                <mat-datepicker #deactiveDt></mat-datepicker>
+                            </mat-form-field>
+                        </div>   
+                      </div>
+                      <div class="row mb-3">                        
+                        <div class="col-md-6">
+                          <mat-form-field class="w-100">
+                            <mat-label>Contact Person Name</mat-label>
+                            <input type="text"   formControlName="contactPersonName" matInput />
+                        </mat-form-field>                         
+                        </div>
+                        <div class="col-md-6">
+                          <mat-form-field class="w-100">
+                            <mat-label>Mobile Number</mat-label>
+                            <input type="text"   formControlName="contactPersonPhone" matInput />
+                        </mat-form-field>  
+                        </div>   
+                      </div>
+
+                      <div class="row mb-3">                        
+                        <div class="col-md-6">
+                          <mat-form-field class="w-100">
+                            <mat-label>Email ID</mat-label>
+                            <input type="text"   formControlName="contactPersonEmail" matInput />
+                        </mat-form-field>                         
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" *ngIf="editmode" (click)="update(clientForm.value)" mat-raised-button color="primary" class="mr-2">Update</button>                
+                          <button type="submit" *ngIf="!editmode" mat-raised-button [disabled]="clientForm.invalid" color="primary" class="mr-2">Save</button>                
+                          <button type="button" (click)="navigateToList()"  mat-raised-button  cdkFocusInitial>Cancel</button>               
+                        </div>                         
+                      </div>
+
+
+                   <!-- <div class="form-group d-flex w-100 justify-content-end">   
+                          <button type="button" *ngIf="editmode" (click)="update(clientForm.value)" mat-raised-button color="primary" class="mr-2">Update</button>                
+                          <button type="submit" *ngIf="!editmode" mat-raised-button [disabled]="clientForm.invalid" color="primary" class="mr-2">Save</button>                
+                          <button type="button" (click)="navigateToList()"  mat-raised-button  cdkFocusInitial>Cancel</button>               
+                     </div> -->
+                 </form>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section>

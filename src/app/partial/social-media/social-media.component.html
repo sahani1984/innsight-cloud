@@ -1,0 +1,10 @@
+<div class="social_icons">
+  <ul>    
+    <ng-container *ngFor="let myicons of socialIconAll; let i=index">
+      <li [class.active]="selectedIndex == i" (click)="addActive(i, myicons.icon_label)" title="{{myicons.icon_label}}">
+        <a routerLink="{{myicons.routes}}" title="" class="btn btn-icon btn-pill btn-lg {{myicons.button_class}}">
+          <i class="{{myicons.icon_class}}"></i></a>
+      </li>
+    </ng-container>
+  </ul>
+</div>

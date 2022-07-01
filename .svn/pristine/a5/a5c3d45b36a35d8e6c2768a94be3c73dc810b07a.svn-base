@@ -1,0 +1,7 @@
+.searching{width:100%; display:flex; clear:both; min-height:300px; position: relative; align-items:center; justify-content:center; height:300px; padding-bottom:50px;
+    .cloud_spinner_dark{
+        &::before{width:100px; height:100px; border:2px solid #999; border-right:5px solid transparent;}
+        &::after{content: "Loading..."; position: absolute;left: 14px;top: 30px; font-style: normal;
+          letter-spacing: 2px; color:#999;}
+        }
+      }

@@ -1,0 +1,2 @@
+.kt-header__topbar .kt-header__topbar-item.kt-header__topbar-item--user .kt-header__topbar-username{color:#333}.dropdown{position:relative}.dropdown.notificaiton_nav .dropdown-menu{position:absolute;right:0;left:auto}.dropdown.notificaiton_nav .dropdown-menu .tab-content .tab-pane{max-height:auto}.dropdown.quick_user_action .dropdown-menu{position:absolute;right:0;left:auto}
+/*# sourceMappingURL=topbar.component.min.css.map */

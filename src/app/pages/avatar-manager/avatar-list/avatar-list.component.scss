@@ -1,0 +1,14 @@
+.category_table{width:100%; clear: both; display:block; float: left; max-height:600px; overflow-y:auto;
+    .mat-table{box-shadow:none;
+       & *{font-family:Poppins, Helvetica, sans-serif !important;}
+       .mat-header-cell{font-size:14px; font-weight:600;}
+       td.mat-cell{font-size:12px;
+        a{display:inline-block;
+        .flaticon-edit{font-size:1.1rem;}
+        }
+        .status_btn{cursor:pointer !important;}    
+      }
+    }
+}
+
+.mat-paginator{width:100%; clear: both;}

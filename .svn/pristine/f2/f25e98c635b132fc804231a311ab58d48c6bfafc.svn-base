@@ -1,0 +1,24 @@
+<h3 mat-dialog-title>Data ({{data.apiName}})</h3>
+<hr/>
+<div mat-dialog-content class="dialogContent customScrollbar">
+  <ul>
+    <li><strong>Type :</strong> {{data.type}}</li>
+    <li><strong>API Name : </strong> {{data.apiName}}</li>
+    <li><strong>Source : </strong> {{data.source}}</li>
+    <li><strong>Profile type : </strong> {{data.profileType}}</li>
+    <li><strong>Input : </strong> {{data.input}}</li>
+    <li><strong>Message : </strong> {{data.message}}</li>
+  </ul>  
+</div>
+<div mat-dialog-actions class="action_el">
+  <button mat-button class="btn btn-secondary btn-sm" (click)="onNoClick()">Close</button>  
+</div>
+
+<style>
+  h3{word-break: break-all;}
+  .dialogContent{max-height:70vh; overflow-y:auto; padding:0 5px 10px 0; margin:0 0 15px;}
+   ul{word-break: break-all; margin:0; padding:0;font-size: 1.1rem; line-height: 22px; letter-spacing: .04rem;}
+   ul li{margin:0 0 5px; padding-left:25px; position:relative;}
+   ul li:before{content:""; width:6px; height:6px; display:block; position: absolute; left:2px; top:8px; transform: rotate(45deg); background-color:#555;}
+   .action_el{display:flex; justify-content:flex-end;}
+</style>

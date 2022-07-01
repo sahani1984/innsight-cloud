@@ -1,0 +1,170 @@
+<section class="w-100 mt-2 collection_manager">
+  <div class="container-fluid">
+    <div class="whitebgbox">
+      <!-- MAIN HEADING BAR SECTION -->
+      <div class="profile_manager">
+        <div class="kt-portlet">
+          <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+              <h3 class="kt-portlet__head-title">Collection List</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-container pb-4">
+
+        <!-- <app-charts [chartType]="chartData"></app-charts> -->
+        <app-charts></app-charts>
+        <div class="searchform">
+          <form>
+            <div class="row mb-3">
+              <div class="col">
+                <mat-form-field class="w-100">
+                  <mat-label>From Date</mat-label>
+                  <input matInput #start_date="ngModel" [(ngModel)]="startDate" (dateChange)="bindData()"
+                    [ngxMatDatetimePicker]="picker1" placeholder="From Date" name="start_date">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #picker1></ngx-mat-datetime-picker>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="w-100">
+                  <mat-label>To Date</mat-label>
+                  <input matInput #end_date="ngModel" [(ngModel)]="endDate" (dateChange)="bindData()"
+                    [ngxMatDatetimePicker]="picker2" name="end_date" placeholder="To Date">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #picker2></ngx-mat-datetime-picker>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="w-100 searchfield">
+                  <mat-label>Search</mat-label>
+                  <input [(ngModel)]="search" name="txtSearch" type="text" (keyup.enter)="bindData()" matInput />
+                  <mat-icon title="Search" (click)="bindData()" matSuffix>search</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Collection Type</mat-label>
+                  <mat-select [(value)]="collectionType" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="keyword">Track Event</mat-option>
+                    <mat-option value="profile">Track Profile</mat-option>
+                    <mat-option value="location"> Track Location</mat-option>
+                    <mat-option value="federated">Federated Search</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Client</mat-label>
+                  <mat-select [(value)]="clientID" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option *ngFor="let c of clientList" [value]="c.client_id">{{c.client_name | titlecase}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Priority</mat-label>
+                  <mat-select [(value)]="priority" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="normal">Normal</mat-option>
+                    <mat-option value="immediate">Immediate</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Activation Status</mat-label>
+                  <mat-select [(value)]="activationStatus" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="active">Active</mat-option>
+                    <mat-option value="inactive">Inactive</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Sort By</mat-label>
+                  <mat-select [(value)]="sort" (selectionChange)="bindData()">
+                    <mat-option value="newest">Newest</mat-option>
+                    <mat-option value="oldest">Oldest</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
+        <div class="table-responsive">
+          <table class="collection_list_tbl">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Collection Name</th>
+                <th>Collection Type</th>
+                <th>Client</th>
+                <th>Created At</th>
+                <th>Activation Date</th>
+                <th>Deactivation Date</th>
+                <th>Priority</th>
+                <!-- <th>Health</th> -->
+                <th>Status</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of dataList; trackBy:trackByCollectionID; let i=index">
+                <tr class="list_row" [class.active]="is_active_row == i" [class.selected]="isSelect" [attr.data-id]="i">
+                  <!-- <td><mat-checkbox [checked]="checked_checkbox" #selector (change)="addToSelected($event, item.collection_id, i)"> &nbsp; </mat-checkbox></td> -->
+                  <td><span class="serial">{{getRecordNumber(i)}}</span> </td>
+                  <td [class.breakWord]="(item.collection_name).length > 25">{{item.collection_name}}</td>
+                  <td>
+                    <ng-template [ngIf]="item.collection_type == 'keyword'">Track Event</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'profile'">Track Profile</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'location'">Track Location</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'website'">Crawl Website</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'news_source'">Add News Source</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'message_app'">Messenger App</ng-template>
+                    <ng-template [ngIf]="item.collection_type == 'federated'">Web Search</ng-template>
+                  </td>
+                  <td>{{item.created_by | titlecase}} </td>
+                  <td>{{item.created_at}} </td>
+                  <td>{{item.activation_date}}</td>
+                  <td>{{item.deactivation_date}}</td>
+                  <td>{{item.priority | titlecase}}</td>
+                  <td>
+                    <span
+                      [ngClass]="item.activationStatus=='active'?'kt-badge--success':item.activationStatus=='Inactive'?'kt-badge--danger':''"
+                      class="kt-badge--inline kt-badge--pill kt-badge">{{item.activationStatus}}</span>
+
+                    <span *ngIf="item.activationStatus == 'active' && item.paused_status =='yes'"
+                      class="kt-badge--inline kt-badge--danger kt-badge--pill kt-badge mt-1">Paused</span>
+
+                  </td>
+                  <td>
+                    <button (click)="viewDetails(item)" matTooltip="View Details" type="button"
+                      class="btn btn-sm btn-clean btn-bold btn-upper">View</button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <mat-paginator [length]="totalNumberOfRecord" [pageSize]="size" [pageIndex]="page" [hidePageSize]="true"
+          (page)="paginate($event)">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</section>

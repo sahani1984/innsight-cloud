@@ -1,0 +1,12 @@
+<div class="charts">
+    <div class="row">
+      <div class="col-md-4">
+        <highcharts-chart *ngIf="defaultPieChartArr.length"  [Highcharts]="Highcharts" [options]="pieChartOptions">
+        </highcharts-chart>
+      </div>
+      <div class="col-md-8">
+        <highcharts-chart *ngIf="defaultColumnChartArr.length" [Highcharts]="Highcharts" [options]="columnChartOptions">
+        </highcharts-chart>
+      </div>
+    </div>
+</div>

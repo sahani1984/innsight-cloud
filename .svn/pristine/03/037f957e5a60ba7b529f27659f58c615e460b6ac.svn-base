@@ -1,0 +1,15 @@
+.error_container{width:100%; padding:0 7rem; display:block; float:left; clear: both;
+ .error_title{width:100%; text-align: center; display:table;
+     h1{font-weight: 700;
+        font-size: 12rem;
+        margin-left: 0; margin-top:5rem; color: #314DA7;
+        -webkit-text-stroke-color: white;}
+ }
+ .error_subtitle{width:100%; text-align: center; display:table; font-size:3.5rem; font-weight: 700;    color: #595d6e;margin-top: 3.57rem;}
+ .error_description{
+    margin-left: 7rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 130%; color: #74788d;
+ }
+}

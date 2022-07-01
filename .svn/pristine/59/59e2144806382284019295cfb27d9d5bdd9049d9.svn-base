@@ -1,0 +1,6 @@
+.charts{
+    width:100%; height:auto; min-height:300px; display:block; float: left; clear:both;  position: relative;
+    &:after{content:""; background-color:#fff; position: absolute; right: -10px; height: 100%; width: 10px;top: 0;}
+    highcharts-chart{width: 100%; height: 300px; display: block; font-family: 'Poppins, Helvetica, sans-serif !important'}
+  }
+  .mat-expansion-panel-header.mat-expanded{max-height:50px;}

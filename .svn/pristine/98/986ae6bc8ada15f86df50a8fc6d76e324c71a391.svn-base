@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAC,aAAa,CAAG,cAAc,CAAG,cAAc,AAAC,CAC5D,gBAAgB,CAAE,IAAI,CACzB,AAED,AAAA,eAAe,CAAC,aAAa,CAAG,cAAc,AAAA,oBAAoB,CAAG,cAAc,AAAC,CAChF,gBAAgB,CAAE,OAAO,CAC5B,AAED,AAAA,eAAe,CAAC,aAAa,CAAG,cAAc,AAAA,oBAAoB,CAAG,cAAc,CAAG,mBAAmB,AAAC,CACtG,KAAK,CAAE,OAAO,CACjB,AACD,AAAA,kBAAkB,CAAC,uBAAuB,AAAA,6BAA6B,CAAC,2BAA2B,AAAA,CAAC,KAAK,CAAC,IAAI,CAAG",
+    "sources": [
+        "../main-nav/main-nav.component.scss"
+    ],
+    "names": [],
+    "file": "main-nav.component.min.css"
+}

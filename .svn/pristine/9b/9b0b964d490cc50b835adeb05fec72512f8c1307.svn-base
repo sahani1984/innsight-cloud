@@ -1,0 +1,31 @@
+
+<div class="wrapper">
+    <div class="cols_row">
+
+    <div class="login_form">
+        <div class="brand_logo"><img src="./assets/images/login-logo.jpg" alt="innsight cloud" /></div>        
+         <div class="formBox">
+             <form>
+             <h3>Forgotten Password?</h3>
+             <div class class="form-group">                
+               <p class="text-center forgot_msg py-3">Enter your email to reset your password</p>
+              </div>
+             <div class="form-group">
+               <mat-form-field class="w-100">
+                   <mat-label>Email ID</mat-label>
+                   <input type="text" matInput />
+               </mat-form-field>
+             </div>           
+             <div class="form-group text-center">
+                <button type="submit"  mat-raised-button color="primary" class="mr-2">Request</button>
+                <button type="button" routerLink="../login"  mat-raised-button>Cancel</button>
+              </div>
+               <div class="form-group text-center">
+                Don't have an account yet ?  &nbsp;    <a routerLink="../register"> Sign Up!</a>
+              </div>        
+            </form>
+         </div>        
+        </div>
+
+</div>
+</div>

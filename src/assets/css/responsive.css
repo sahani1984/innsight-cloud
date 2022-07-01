@@ -1,0 +1,17 @@
+@media screen and (max-width:767px) {
+    .wrapper{max-width:100%;}
+    .wrapper .cols_row .login_form .brand_logo img{max-width:150px;}
+    .wrapper .cols_row .login_form{max-width:80%;}
+
+    header{padding:0;}
+    header .container-fluid{padding-left:0; padding-right:0;}    
+    header .kt-header__brand-logo-default{max-width:100px;}  
+    header .row{flex-wrap: nowrap;}
+    header #tabs_nav{display:none !important;}
+    header .kt-header__topbar{margin-top:0;}
+
+    main .mat-sidenav-container .example-sidenav{position:fixed; top:51px;}
+    main .mat-sidenav-container .mat-drawer-content{margin-left:4em !important;}
+    .mat-drawer-inner-container .panel_nav{justify-content:flex-end;}
+    .mat-drawer-inner-container .panel_nav span{display:none !important;}
+}

@@ -1,0 +1,81 @@
+<section class="w-100 mt-2">
+  <div class="container-fluid">
+    <div class="whitebgbox">
+      <!-- MAIN HEADING BAR SECTION -->
+      <div class="profile_manager">
+        <div class="kt-portlet">
+          <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+              <h3 class="kt-portlet__head-title">Heartbeat</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kt-container mb-5 pb-5">
+
+        <div class="searchform">
+          <form>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <mat-label>Category Type</mat-label>
+                  <mat-select [(value)]="categoryType" (selectionChange)="getJobName()">                   
+                    <mat-option *ngFor="let c of categoryLists" [value]="c.category_type">
+                      {{c.category_type | titlecase}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <mat-label>Job name</mat-label>
+                  <mat-select [(value)]="jobName" (selectionChange)="getHeartbeat()">
+                     <mat-option value="">All</mat-option>                    
+                    <mat-option *ngFor="let j of jobLists" [value]="j.job_name">
+                      {{j.job_name | titlecase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>            
+            </div>
+          </form>
+        </div>
+
+
+
+        <div class="avatar_content">
+          <div [hidden]="!heartbeatLists.length" class="category_table customScrollbar">
+            <table mat-table [dataSource]="heartbeatLists" #recordTbl class="mat-elevation-z8 w-100">
+              <ng-container matColumnDef="Sr.No">
+                <th mat-header-cell *matHeaderCellDef width="80">Sr.No</th>
+                <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+              </ng-container>
+              <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element">{{element.type | titlecase}}</td>
+              </ng-container>
+
+            
+              <ng-container matColumnDef="Job Name">
+                <th mat-header-cell *matHeaderCellDef>Job Name</th>
+                <td mat-cell *matCellDef="let element">{{element.job_name | titlecase}} </td>
+              </ng-container>
+
+      
+
+              <ng-container matColumnDef="Last Hit Time">
+                <th mat-header-cell *matHeaderCellDef> Last Hit Time </th>
+                <td mat-cell *matCellDef="let element">{{element.last_hit_time | date:'dd/MM/yyyy hh:mm:ss'}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <!-- <mat-paginator [length]="totalNumberOfRecord" [pageSize]="size" [pageIndex]="page" [hidePageSize]="true"
+            (page)="paginate($event)">
+          </mat-paginator> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

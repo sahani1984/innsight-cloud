@@ -1,0 +1,26 @@
+<div class="charts">
+  <ng-container *ngIf="chartData.type == 'default'">
+    <div class="row">
+      <div class="col-md-4">
+        <highcharts-chart *ngIf="defaultPieChartArr.length"  [Highcharts]="Highcharts" [options]="pieChartOptions">
+        </highcharts-chart>
+      </div>
+      <div class="col-md-8">
+        <highcharts-chart *ngIf="defaultColumnChartArr.length" [Highcharts]="Highcharts" [options]="columnChartOptions">
+        </highcharts-chart>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="chartData.type == 'client'">
+    <div class="row">
+      <div class="col-md-4 pl-0">
+        <highcharts-chart *ngIf="clientPieChartArr.length"  [Highcharts]="Highcharts" [options]="clientPieChartOptions">
+        </highcharts-chart>
+      </div>  
+      <div class="col-md-8">
+        <highcharts-chart *ngIf="clientColumnChartArr.length" [Highcharts]="Highcharts" [options]="sourceColumnChartOptions">
+        </highcharts-chart>
+      </div>    
+    </div>
+  </ng-container>
+</div>

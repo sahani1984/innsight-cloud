@@ -1,0 +1,40 @@
+
+<section class="w-100 mt-2">
+    <div class="container-fluid">
+      <div class="whitebgbox">
+        <!-- MAIN HEADING BAR SECTION -->
+        <div class="profile_manager">
+          <div class="kt-portlet">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">Add Avatar Catergory</h3>
+              </div>           
+            </div>
+          </div>
+        </div>
+  
+        <div class="kt-container mb-5 pb-5">  
+            <div class="avatar_content">
+                <form [formGroup]="addCatForm" (ngSubmit)="addCategory(addCatForm.value)">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Category</mat-label>
+                                <input type="text" matInput  formControlName="categoryName"  />
+                            </mat-form-field>
+                        </div>                                            
+                     </div>
+
+                     <div class="row mb-3">                       
+                        <div class="col-md-6 d-flex justify-content-end">                     
+                           <button type="submit" [disabled]="addCatForm.invalid" mat-raised-button color="primary" class="mr-2">Save</button>                
+                           <button type="button" routerLink="../avatar-list-category" mat-raised-button>Cancel</button>  
+                        </div>                      
+                     </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

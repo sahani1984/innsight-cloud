@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAkCE,AACE,gBADc,CACd,kBAAkB,AAAA,4BAA4B,AAAA,CAC5C,WAAW,CAAE,GAAG,CAChB,cAAc,CAAE,GAAG,CACnB,aAAa,CAAE,GAAG,CAClB,YAAY,CAAE,GAAG,CACjB,UAAU,CAAE,IAAI,CAChB,aAAa,CAAE,GAAG,CAClB,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,GAAG,CAKjB,AAdH,AAUI,gBAVY,CACd,kBAAkB,AAAA,4BAA4B,CAS5C,eAAe,AAAA,CACb,SAAS,CAAE,eAAe,CAC1B,WAAW,CAAC,GAAG,CAChB",
+    "sources": [
+        "../chips/chips.component.scss"
+    ],
+    "names": [],
+    "file": "chips.component.min.css"
+}

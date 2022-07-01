@@ -1,0 +1,4 @@
+table tr td:fist-child{max-width:50px;}
+table tr td:nth-child(2), table tr th:nth-child(2){max-width:165px; min-width:150px; padding-right:30px;}
+table tr td:nth-child(3), table tr th:nth-child(3){max-width:250px; min-width:225px; word-break: break-all; padding-right:30px;}
+.setMinh{min-height:500px;}

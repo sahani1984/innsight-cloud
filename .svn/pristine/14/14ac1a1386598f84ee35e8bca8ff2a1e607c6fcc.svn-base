@@ -1,0 +1,157 @@
+<section class="w-100 mt-2">
+  <div class="container-fluid">
+    <div class="whitebgbox">
+      <!-- MAIN HEADING BAR SECTION -->
+      <div class="profile_manager">
+        <div class="kt-portlet">
+          <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+              <h3 class="kt-portlet__head-title">Manage News Source</h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+              <div class="kt-portlet__head-actions">
+                <a routerLink="../add-news-source" class="btn btn-label-primary btn-sm btn-bold mr-2">Add news
+                  source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kt-container mb-5 pb-5">
+        <div class="avatar_content">
+          <form>
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <mat-form-field class="w-100 searchfield">
+                  <mat-label>Search by name</mat-label>
+                  <input type="text" name="searchByName" (keyup.enter)="bindData()" [(ngModel)]="searchByName"
+                    matInput />
+                  <mat-icon (click)="bindData()" matSuffix>search</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <mat-label>Collection Mode</mat-label>
+                  <mat-select [(value)]="collection_mode" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="scrapper">Scrapper</mat-option>
+                    <mat-option value="feed">Feed Url</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <mat-label>Language</mat-label>
+                  <mat-select [(value)]="language" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option *ngFor="let lang of collectionService.newsLanguage" [value]="lang.record_id">
+                      {{lang.language}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-3">
+                <mat-form-field class="w-100">
+                  <mat-label>Country</mat-label>
+                  <mat-select [(value)]="country" (selectionChange)="bindData()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option *ngFor="let c of collectionService.countryList" [value]="c.code">{{c.country}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+
+          <div [hidden]="!sourceList.length" class="category_table scrollable_mat_table  customScrollbar">
+            <table mat-table [dataSource]="sourceList" #sourceListTbl class="mat-elevation-z8 w-100">
+              <ng-container matColumnDef="Sr.No">
+                <th mat-header-cell *matHeaderCellDef width="80">Sr.No</th>
+                <td mat-cell *matCellDef="let element; let i=index">{{getRecordNumber(i)}}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="News Source">
+                <th mat-header-cell *matHeaderCellDef> News Source </th>
+                <td mat-cell *matCellDef="let element"> {{element.art_source}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Country">
+                <th mat-header-cell *matHeaderCellDef> Country </th>
+                <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Language">
+                <th mat-header-cell *matHeaderCellDef> Language </th>
+                <td mat-cell *matCellDef="let element"> {{element.language | titlecase}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Collection Mode">
+                <th mat-header-cell *matHeaderCellDef> Collection Mode</th>
+                <td mat-cell *matCellDef="let element"> {{element.collection_mode | titlecase}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef>Status </th>
+                <td mat-cell *matCellDef="let element">
+                  <span (click)="changeStatus($event, element.active_status, element.record_id)"
+                    [ngClass]="(element.active_status == 'active') ? 'btn-label-success' : (element.active_status == 'inactive') ? 'btn-label-danger'  : ''"
+                    class="btn btn-bold btn-sm btn-font-sm status_btn">
+                    {{element.active_status | titlecase}}
+                  </span> </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Start Crawl Date">
+                <th mat-header-cell *matHeaderCellDef>Start Crawl Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.start_crawl_date | date:'dd/MM/yyyy hh:mm:ss'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Last Crawl Date">
+                <th mat-header-cell *matHeaderCellDef>Last Crawl Date </th>
+                <td mat-cell *matCellDef="let element">{{element.last_crawl_date  | date:'dd/MM/yyyy hh:mm:ss'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Crawling Status">
+                <th mat-header-cell *matHeaderCellDef>Crawling Status </th>
+                <td mat-cell *matCellDef="let element">
+                  <ng-template [ngIf]="element.crawling_status == 0"><span class="{{status_btn}} btn-label-default">Pending</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 1"><span class="{{status_btn}} btn-label-success">Completed</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 2"><span class="{{status_btn}} btn-label-warning">Running</span></ng-template>
+                <ng-template [ngIf]="element.crawling_status == 3"><span class="{{status_btn}} btn-label-danger">Error</span></ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Message">
+                <th mat-header-cell *matHeaderCellDef>Message </th>
+                <td mat-cell *matCellDef="let element">{{element.msg}}  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Record ID">
+                <th mat-header-cell *matHeaderCellDef>Record ID </th>
+                <td mat-cell *matCellDef="let element">{{element.record_id}} </td>
+              </ng-container>
+
+             <ng-container matColumnDef="Action" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef width="50"> Action </th>
+                <td mat-cell *matCellDef="let element; let i=index" align="center">
+                  <ng-container *ngIf="element.avatar_added_from !== 'client'">
+                    <a (click)="editNewsSource(element.record_id)" title="Edit" class="text-primary mr-3"
+                      href="javascript:void(0)"><i class="flaticon-edit"></i></a>
+                    <a (click)="delete(element.record_id)" title="Delete" class="text-danger"
+                      href="javascript:void(0)"><i class="flaticon-delete"></i></a>
+                  </ng-container>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <mat-paginator [length]="totalNumberOfRecord" [pageSize]="size" [pageIndex]="page" [hidePageSize]="true"
+            (page)="paginate($event)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
